@@ -1,54 +1,21 @@
 "use client";
-import axios from "axios";
+import { createContext, useContext, useEffect } from "react";
+import { useTokenManager } from "@/hooks/useTokenManager";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useEffect, useState } from "react";
 
-interface TokenTypes {
-  token: string;
-  handleRetrieveToken: (value: string) => void;
+interface TokenContextType {
+  token: string | null;
+  handleRetrieveToken: (email: string) => void;
   loading: boolean;
 }
-const AuthToken = createContext<TokenTypes>({
-  token: "",
-  handleRetrieveToken: () => {},
-  loading: true,
-});
+
+const TokenContext = createContext<TokenContextType | undefined>(undefined);
 
 export const TokenProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  // const [token, setToken] = useState<string>(() => {
-  //   // Initialize token from local storage or an empty string
-  //   if (typeof window !== "undefined") {
-  //     return localStorage.getItem("token") || "";
-  //   } else {
-  //     return "";
-  //   }
-  // });
-  const [token, setToken] = useState("");
-
-  const [loading, setLoading] = useState(false);
+  const { token, handleRetrieveToken, loading } = useTokenManager();
   const router = useRouter();
-
-  const handleRetrieveToken = async (email: string) => {
-    setLoading(true);
-    try {
-      const response = await axios.post("https://qt.organogram.app/token", {
-        email,
-      });
-      const { token } = response.data;
-      console.log(token);
-      // if (typeof window !== "undefined") {
-      //   localStorage.setItem("token", token);
-      // }
-
-      setToken(token);
-    } catch (error) {
-      console.log("error posting token", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
     if (!token) {
@@ -57,10 +24,16 @@ export const TokenProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [token, router]);
 
   return (
-    <AuthToken.Provider value={{ token, handleRetrieveToken, loading }}>
+    <TokenContext.Provider value={{ token, handleRetrieveToken, loading }}>
       {children}
-    </AuthToken.Provider>
+    </TokenContext.Provider>
   );
 };
 
-export const useToken = (): TokenTypes => useContext(AuthToken);
+export const useToken = () => {
+  const context = useContext(TokenContext);
+  if (context === undefined) {
+    throw new Error("useToken must be used within a TokenProvider");
+  }
+  return context;
+};

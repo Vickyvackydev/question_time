@@ -11,7 +11,7 @@ import Deletemodal from "@/components/deleteModal";
 import { motion } from "framer-motion";
 
 const QuestionQuiz = () => {
-  const { token, loading } = useToken();
+  const { token } = useToken();
 
   const [modal, setModal] = useState(false);
   const [mode, setMode] = useState("");
@@ -67,7 +67,7 @@ const QuestionQuiz = () => {
     setModal(true);
   };
 
-  if (loading) return "Loading...";
+  // if (loading) return "Loading...";
   return (
     <main className="flex justify-center items-center lg:my-10 mt-16 relative lg:px-0 px-6">
       <div

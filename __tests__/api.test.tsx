@@ -1,5 +1,7 @@
+import { useToken } from "@/context/AuthToken";
 import axios from "axios";
 
+const { token } = useToken();
 it("should return the expected data", async () => {
   const getQuestionEndpoint = "https://qt.organogram.app/questions";
   const token = process.env.NEXT_PUBLIC_TOKEN; // a token fetched is used for the testing

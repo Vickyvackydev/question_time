@@ -13,6 +13,7 @@ const LoginWithToken = () => {
       setEmail("");
       router.push("/quest-page");
     }
+    // console.log(token);
   }, [token]);
   return (
     <div className="flex justify-center items-center my-[15rem]  flex-col gap-3">

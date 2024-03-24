@@ -46,3 +46,7 @@ This is a project for a test interview, git is initialised in this project, more
 - run "npm test" to trigger jest testing for this project
 - Testing will only run for the homepage, to signify that jest is actually runing, and test is also made for the question api, to fetch the questions data. jest status of passed detects that the data has being fetched successfully.
 - in the test file for the api, a token was fetched and stored in an env variable to test for the fetch questions API.
+
+## API ERROR
+
+- the api only accepts token to fetch data from the email set as example and also ones personal lucky mail that was made achieve. so for it test please make use of "email@email.com" to fetch your own token and retrieve data.
