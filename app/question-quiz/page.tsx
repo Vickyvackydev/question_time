@@ -11,7 +11,7 @@ import Deletemodal from "@/components/deleteModal";
 import { motion } from "framer-motion";
 
 const QuestionQuiz = () => {
-  const { token } = useToken();
+  const { token, loading } = useToken();
 
   const [modal, setModal] = useState(false);
   const [mode, setMode] = useState("");
@@ -67,15 +67,16 @@ const QuestionQuiz = () => {
     setModal(true);
   };
 
+  if (loading) return "Loading...";
   return (
     <main className="flex justify-center items-center lg:my-10 mt-16 relative lg:px-0 px-6">
       <div
         className={` ${
-          Object.keys(question).length > 0 ? "animated-border" : "border-none"
+          Object.keys(question)?.length > 0 ? "animated-border" : "border-none"
         } lg:w-[50vw] w-full   rounded-lg lg:h-[600px] h-full flex justify-center items-center `}
       >
         <div>
-          {Object.keys(question).length > 0 && (
+          {Object.keys(question)?.length > 0 && (
             <button
               className="bg-transparent rounded-lg px-3 py-2   font-semibold hover:scale-75 transition-all duration-300 float-right  text-pink-500"
               onClick={() => {
@@ -88,7 +89,7 @@ const QuestionQuiz = () => {
             </button>
           )}
         </div>
-        {Object.keys(question).length > 0 ? (
+        {Object.keys(question)?.length > 0 ? (
           <div
             key={Object.keys(question)[currentQuestion]}
             className="flex justify-center items-center flex-col mt-[6rem]"
