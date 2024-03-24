@@ -146,7 +146,7 @@ const QuestionQuiz = () => {
                   width={30}
                   height={30}
                   alt="next image"
-                  className="scale-x-[-1] cursor-pointer"
+                  className="scale-x-[-1] cursor-pointer transition-all duration-150"
                 />
               </div>
               <div className="flex gap-2 items-center">
@@ -164,7 +164,7 @@ const QuestionQuiz = () => {
                   width={30}
                   height={30}
                   alt="next image"
-                  className="cursor-pointer"
+                  className="cursor-pointer hover:scale-95 transition-all duration-150"
                 />
               </div>
             </div>
