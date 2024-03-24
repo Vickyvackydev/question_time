@@ -19,7 +19,11 @@ export const TokenProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [token, setToken] = useState<string>(() => {
     // Initialize token from local storage or an empty string
-    return localStorage.getItem("token") || "";
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("token") || "";
+    } else {
+      return "";
+    }
   });
   // const [token, setToken] = useState("");
 
@@ -34,8 +38,9 @@ export const TokenProvider: React.FC<{ children: React.ReactNode }> = ({
       });
       const { token } = response.data;
       console.log(token);
-
-      localStorage.setItem("token", token);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("token", token);
+      }
 
       setToken(token);
     } catch (error) {
