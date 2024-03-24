@@ -5,7 +5,7 @@ import { useToken } from "@/context/AuthToken";
 
 export const useFetchData = () => {
   const { token } = useToken();
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<any>({});
 
   const fetchQuestions = async () => {
     try {

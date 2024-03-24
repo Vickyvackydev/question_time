@@ -39,12 +39,12 @@ const Modal = ({
             <div className="flex min-h-full justify-center items-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
+                enter="transition-transform ease-out duration-300"
+                enterFrom="translate-y-full"
+                enterTo="translate-y-0"
+                leave="transition-transform ease-in duration-200"
+                leaveFrom="translate-y-0"
+                leaveTo="translate-y-full"
               >
                 <Dialog.Panel
                   className={` ${maxWidth} transform overflow-hidden rounded-2xl text-center bg-bg_black bg-opacity-70 p-6 align-middle shadow-xl transition-all h-full`}
